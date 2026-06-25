@@ -66,8 +66,11 @@ function HeroSection() {
           <p className="font-serif text-xl md:text-2xl leading-relaxed text-muted mb-8">
             {site.tagline}
           </p>
-          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-6">
+          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-4">
             {hero.tagline}
+          </p>
+          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-6">
+            The platform begins with one such inquiry — <em>Emptiness for the Rest of Us</em>: a free book exploring the constructed self, spiritual ego, and the possibility of a less defended life.
           </p>
           <PrimaryCTA className="mb-4" />
           <p className="font-sans text-sm text-muted mt-3">

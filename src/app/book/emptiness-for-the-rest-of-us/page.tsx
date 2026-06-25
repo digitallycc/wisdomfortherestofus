@@ -93,7 +93,7 @@ export default function BookPage() {
       </section>
 
       <section className="py-16 md:py-20">
-        <EditorialSection title="Author\u2019s note">
+        <EditorialSection title="Author's note">
           <p>{book.authorNote}</p>
         </EditorialSection>
       </section>
