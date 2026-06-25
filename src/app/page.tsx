@@ -138,6 +138,13 @@ function WhyBuddhismSection() {
     <section className="bg-white border-y border-border py-16 md:py-20">
       <EditorialSection title={whyBuddhism.title}>
         <p>{whyBuddhism.body}</p>
+        <ul className="space-y-1 mt-4 mb-6">
+          {["the nature of the self", "the causes of suffering", "attachment and clinging", "dependent existence", "perception and mental construction", "the relationship between change and freedom", "the difference between experience and the stories built around it"].map((item) => (
+            <li key={item} className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted pl-4 relative before:content-['\2013'] before:absolute before:left-0 before:text-accent">
+              {item}
+            </li>
+          ))}
+        </ul>
         <p>{whyBuddhism.clarification}</p>
       </EditorialSection>
     </section>

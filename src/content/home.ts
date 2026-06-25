@@ -22,7 +22,7 @@ export const emptinessExplanation = {
 export const whyBuddhism = {
   title: "Why begin with Buddhist emptiness?",
   body: `Because some traditions have examined certain human questions with unusual depth. Buddhist thought has spent centuries examining: the nature of the self; the causes of suffering; attachment and clinging; dependent existence; perception and mental construction; the relationship between change and freedom; the difference between experience and the stories built around it.`,
-  clarification: `That does not mean wisdom belongs exclusively to Buddhism. It means Buddhism has developed powerful tools for looking at these particular questions. The aim is not to borrow a Buddhist identity. It is not to declare all religions the same. It is not to turn Buddhist teachings into vague universal spirituality. It is to encounter an insight carefully enough that it is allowed to challenge us before we translate it back into what we already know.`,
+  clarification: `That does not mean wisdom belongs exclusively to Buddhism. It means Buddhism has developed powerful tools for looking at these particular questions. The aim is to encounter an insight carefully enough that it is allowed to challenge us before we translate it back into what we already know — not to borrow a Buddhist identity, declare all religions the same, or turn Buddhist teachings into vague universal spirituality.`,
 };
 
 export const wisdomWithoutConversion = {
