@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       {
         url: `${site.url}/images/og-image.jpg`,
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: `${site.name} — ${site.tagline}`,
       },
     ],
@@ -67,7 +67,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta property="og:image" content={`${site.url}/images/og-image.jpg`} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:height" content="1200" />
         <meta property="og:image:alt" content={`${site.name} — ${site.tagline}`} />
         <meta name="twitter:image" content={`${site.url}/images/og-image.jpg`} />
       </head>
