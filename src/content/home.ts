@@ -2,8 +2,6 @@ import { book } from "./book";
 
 export const hero = {
   tagline: "Wisdom does not belong to one religion, one philosophy, one culture, or one kind of person.",
-  description: `It may appear in a sacred text, a philosophical argument, a contemplative tradition, a scientific insight, a story, a life honestly examined, or a question that refuses to go away. Wherever it appears, it deserves to be approached with seriousness. Not blindly accepted. Not rejected because it came from somewhere unfamiliar. Not immediately absorbed into what we already believe. But examined. Tested. Lived with.`,
-  cta: "Read the Book Free",
   secondaryText: "No payment. No registration. No conversion. No new identity required.",
 };
 
@@ -37,21 +35,6 @@ export const wisdomWithoutConversion = {
 export const whoWeAre = {
   title: "Who are \u201Cthe rest of us\u201D?",
   body: `Not only scholars. Not only monks, priests, mystics, philosophers, or lifelong practitioners.`,
-  list: [
-    "jobs",
-    "families",
-    "debts",
-    "aging parents",
-    "uncertain futures",
-    "private regrets",
-    "old anger",
-    "religious commitments",
-    "doubts",
-    "tired bodies",
-    "complicated relationships",
-    "unfinished questions",
-    "minds that keep turning every experience into a story about \u201Cme\u201D",
-  ],
   conclusion: `The rest of us may never enter a monastery, philosophy department, meditation centre, seminary, or retreat. But we still live with pride, fear, suffering, comparison, change, loss, responsibility, and the need for meaning. Wisdom matters here too. In the office. At home. During conflict. After failure. In prayer. In grief. In the moment before a harsh sentence is spoken. In the small decision not to make everything about ourselves.`,
 };
 

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     url: site.url,
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: `${site.url}/images/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: `${site.name} — ${site.tagline}`,

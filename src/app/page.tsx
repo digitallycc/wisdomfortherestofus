@@ -37,7 +37,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <FeaturedBookSection />
       <EmptinessExplanationSection />
       <WhyBuddhismSection />
       <WisdomWithoutConversionSection />
@@ -51,7 +50,27 @@ export default function HomePage() {
       <ReviewerSection />
       <EssaysSection />
       <FinalQuestionSection />
-    </>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Book",
+              name: book.title,
+              author: {
+                "@type": "Person",
+                name: site.author.name,
+              },
+              datePublished: book.published,
+              genre: book.genre,
+              inLanguage: book.language,
+              url: `${site.url}/#book`,
+              sameAs: "https://archive.org/details/emptiness-for-the-rest-of-us-pdf",
+              license: book.license,
+            }),
+          }}
+        />
+      </>
   );
 }
 
@@ -60,20 +79,28 @@ function HeroSection() {
     <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
-          <SectionHeading as="h1" className="mb-4">
+          <SectionHeading as="h1" className="mb-3">
             {site.name}
           </SectionHeading>
-          <p className="font-serif text-xl md:text-2xl leading-relaxed text-muted mb-8">
+          <p className="font-serif text-xl md:text-2xl leading-relaxed text-muted mb-6">
             {site.tagline}
           </p>
-          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-4">
+          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-6">
             {hero.tagline}
           </p>
-          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-6">
-            The platform begins with one such inquiry — <em>Emptiness for the Rest of Us</em>: a free book exploring the constructed self, spiritual ego, and the possibility of a less defended life.
-          </p>
-          <PrimaryCTA className="mb-4" />
-          <p className="font-sans text-sm text-muted mt-3">
+          <div className="mb-6 pl-4 border-l-2 border-accent/40">
+            <p className="font-serif text-lg md:text-xl font-semibold text-text mb-1">
+              {book.title}
+            </p>
+            <p className="font-serif text-base italic text-muted mb-2">
+              {book.subtitle}
+            </p>
+            <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-muted">
+              {book.description}
+            </p>
+          </div>
+          <PrimaryCTA className="mb-3" />
+          <p className="font-sans text-sm text-muted">
             {hero.secondaryText}
           </p>
         </div>
@@ -86,31 +113,6 @@ function HeroSection() {
             className="w-full max-w-xs mx-auto rounded-sm shadow-lg"
           />
         </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedBookSection() {
-  return (
-    <section id="book" className="bg-white border-y border-border scroll-mt-20">
-      <div className="max-w-prose mx-auto px-6 py-16 md:py-20 text-center">
-        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mb-3">
-          Featured Book
-        </p>
-        <SectionHeading className="mb-2">
-          {book.title}
-        </SectionHeading>
-        <p className="font-serif text-xl italic text-muted mb-4">
-          {book.subtitle}
-        </p>
-        <p className="font-sans text-[17px] leading-relaxed text-muted mb-6">
-          {book.description}
-        </p>
-        <PrimaryCTA />
-        <p className="font-sans text-sm text-muted mt-3">
-          {hero.secondaryText}
-        </p>
       </div>
     </section>
   );
@@ -239,12 +241,12 @@ function BookJourneySection() {
 function QuestionsSection() {
   return (
     <section className="bg-white border-y border-border py-16 md:py-20">
-      <EditorialSection title="Some questions the book explores">
-        <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted">
-          The following questions guide the inquiry.
-        </p>
-      </EditorialSection>
-      <div className="max-w-5xl mx-auto px-6 md:px-8 mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="max-w-prose mx-auto px-6 md:px-8 mb-8">
+        <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-snug">
+          Some questions the book explores
+        </h2>
+      </div>
+      <div className="max-w-5xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         {book.questions.map((q) => (
           <QuestionCard key={q.title} title={q.title} body={q.body} />
         ))}

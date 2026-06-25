@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { site, navigation } from "@/content/site";
+import { site } from "@/content/site";
 
 export default function SiteFooter() {
   return (
@@ -11,29 +10,6 @@ export default function SiteFooter() {
             <p className="font-sans text-sm text-muted leading-relaxed">
               {site.tagline}
             </p>
-          </div>
-
-          <div>
-            <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mb-3">
-              Pages
-            </p>
-            <nav className="flex flex-col gap-2" aria-label="Footer navigation">
-              {navigation.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-sans text-sm text-muted hover:text-text transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href="/privacy"
-                className="font-sans text-sm text-muted hover:text-text transition-colors"
-              >
-                Privacy
-              </Link>
-            </nav>
           </div>
 
           <div>
