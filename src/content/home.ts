@@ -31,7 +31,7 @@ export const wisdomWithoutConversion = {
   note: "To learn from another source is not necessarily to surrender one\u2019s own identity. Nor is it permission to flatten differences. Real learning requires both openness and honesty.",
   opennessQuestion: "What truth may be present here?",
   honestyQuestion: "What does this source actually say, and where might I be misunderstanding it?",
-  closing: "Wisdom for the Rest of Us exists between those two questions.",
+  closing: "Wisdom for the Rest of Us lives where those two questions meet.",
 };
 
 export const whoWeAre = {
