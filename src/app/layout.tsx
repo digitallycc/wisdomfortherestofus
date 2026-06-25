@@ -65,6 +65,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
+        <meta property="og:image" content={`${site.url}/images/og-image.jpg`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={`${site.name} — ${site.tagline}`} />
+        <meta name="twitter:image" content={`${site.url}/images/og-image.jpg`} />
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased">
         <a href="#main-content" className="skip-link">
