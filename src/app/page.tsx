@@ -93,7 +93,7 @@ function HeroSection() {
 
 function FeaturedBookSection() {
   return (
-    <section className="bg-white border-y border-border">
+    <section id="book" className="bg-white border-y border-border scroll-mt-20">
       <div className="max-w-prose mx-auto px-6 py-16 md:py-20 text-center">
         <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mb-3">
           Featured Book
@@ -248,7 +248,7 @@ function QuestionsSection() {
 
 function AuthorSection() {
   return (
-    <section className="py-16 md:py-20">
+    <section id="about" className="py-16 md:py-20 scroll-mt-20">
       <AuthorProfile />
     </section>
   );
@@ -293,7 +293,7 @@ function ContentsSection() {
 
 function ReviewerSection() {
   return (
-    <section className="bg-white border-y border-border py-16 md:py-20">
+    <section id="contact" className="bg-white border-y border-border py-16 md:py-20 scroll-mt-20">
       <InquiryList />
     </section>
   );
@@ -301,7 +301,7 @@ function ReviewerSection() {
 
 function EssaysSection() {
   return (
-    <section className="py-16 md:py-20">
+    <section id="essays" className="py-16 md:py-20 scroll-mt-20">
       <div className="max-w-prose mx-auto px-6 md:px-8">
         <SectionHeading className="mb-4">
           Essays and continuing inquiries

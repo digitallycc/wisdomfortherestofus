@@ -14,10 +14,10 @@ export const site = {
 } as const;
 
 export const navigation = [
-  { label: "Book", href: "/book/emptiness-for-the-rest-of-us" },
-  { label: "About", href: "/about" },
-  { label: "Essays", href: "/essays" },
-  { label: "Contact", href: "/contact" },
+  { label: "Book", href: "/#book" },
+  { label: "About", href: "/#about" },
+  { label: "Essays", href: "/#essays" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const internetArchiveUrl =

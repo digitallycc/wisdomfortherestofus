@@ -4,7 +4,7 @@ export default function PlatformPrinciples() {
   return (
     <div className="max-w-prose mx-auto px-6 md:px-8">
       <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-6 leading-snug">
-        What this platform is\u2014and is not
+        What this platform is — and is not
       </h2>
 
       <div className="mb-8">
