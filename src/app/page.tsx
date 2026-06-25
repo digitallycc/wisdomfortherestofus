@@ -175,23 +175,13 @@ function WhoWeAreSection() {
     <section className="bg-white border-y border-border py-16 md:py-20">
       <EditorialSection title={whoWeAre.title}>
         <p>{whoWeAre.body}</p>
-      </EditorialSection>
-      <div className="max-w-prose mx-auto px-6 md:px-8 mt-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
-          {whoWeAre.list.map((item) => (
-            <p
-              key={item}
-              className="font-serif text-sm italic text-muted px-3 py-2 bg-background/50"
-            >
-              {item}
-            </p>
-          ))}
-        </div>
-      </div>
-      <EditorialSection className="mt-8">
-        <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted">
-          {whoWeAre.conclusion}
+        <p>
+          The rest of us are people with jobs, families, debts, and aging parents.
+          With uncertain futures, private regrets, old anger, and religious commitments.
+          With doubts, tired bodies, complicated relationships, and unfinished questions.
+          With minds that keep turning every experience into a story about &ldquo;me.&rdquo;
         </p>
+        <p>{whoWeAre.conclusion}</p>
       </EditorialSection>
     </section>
   );
