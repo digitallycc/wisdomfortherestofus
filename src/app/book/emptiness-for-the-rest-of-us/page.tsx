@@ -46,7 +46,7 @@ export default function BookPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
             <img
-              src="/images/book-cover.svg"
+              src="/images/book-cover.webp"
               alt="Cover of Emptiness for the Rest of Us by Muhammad Ibrahim, showing an empty meditating robe beneath a moonlit sky."
               width={400}
               height={600}

@@ -76,7 +76,7 @@ function HeroSection() {
         </div>
         <div>
           <img
-            src="/images/book-cover.svg"
+            src="/images/book-cover.webp"
             alt="Cover of Emptiness for the Rest of Us by Muhammad Ibrahim, showing an empty meditating robe beneath a moonlit sky."
             width={400}
             height={600}
