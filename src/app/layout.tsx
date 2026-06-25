@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     url: site.url,
     images: [
       {
-        url: `${site.url}/images/og-image.jpg`,
+        url: `${site.url}/images/og-image.jpg?v=2`,
         width: 1200,
         height: 1200,
         alt: `${site.name} — ${site.tagline}`,
@@ -65,7 +65,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <meta property="og:image" content={`${site.url}/images/og-image.jpg`} />
+        <meta property="og:image" content={`${site.url}/images/og-image.jpg?v=2`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="1200" />
         <meta property="og:image:alt" content={`${site.name} — ${site.tagline}`} />
