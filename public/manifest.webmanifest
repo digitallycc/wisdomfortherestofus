@@ -1,0 +1,16 @@
+{
+  "name": "Wisdom for the Rest of Us",
+  "short_name": "WisdomRest",
+  "description": "A home for serious inquiry into universal wisdom without conversion, jargon, or borrowed identity.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#8b4a3a",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f5f0"/>
+  <rect x="80" y="80" width="400" height="470" rx="8" fill="#1a1a2e" opacity="0.9"/>
+  <circle cx="280" cy="190" r="50" fill="#e8e4de" opacity="0.15"/>
+  <rect x="180" y="320" width="200" height="160" rx="80" fill="#2d2d4a"/>
+  <text x="560" y="210" font-family="serif" font-size="48" fill="#1a1a1a" font-weight="700">Wisdom for the</text>
+  <text x="560" y="270" font-family="serif" font-size="48" fill="#1a1a1a" font-weight="700">Rest of Us</text>
+  <text x="560" y="330" font-family="sans-serif" font-size="22" fill="#6b6560">Serious ideas for</text>
+  <text x="560" y="362" font-family="sans-serif" font-size="22" fill="#6b6560">ordinary human lives</text>
+  <text x="560" y="430" font-family="sans-serif" font-size="18" fill="#8b4a3a">Read Emptiness for the Rest of Us free</text>
+  <rect x="560" y="460" width="240" height="50" rx="4" fill="#8b4a3a"/>
+  <text x="680" y="491" text-anchor="middle" font-family="sans-serif" font-size="16" fill="white" font-weight="600">Read the Book Free</text>
+</svg>
