@@ -37,6 +37,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <SelfInquirySection />
       <EmptinessExplanationSection />
       <WhyBuddhismSection />
       <WisdomWithoutConversionSection />
@@ -115,6 +116,38 @@ function HeroSection() {
             height={600}
             className="w-full max-w-xs mx-auto rounded-sm shadow-lg"
           />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SelfInquirySection() {
+  return (
+    <section className="bg-dark-bg text-dark-text py-20 md:py-28">
+      <div className="max-w-prose mx-auto px-6 md:px-8">
+        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mb-6">
+          The question
+        </p>
+        <p className="font-serif text-2xl md:text-4xl leading-snug font-semibold mb-8">
+          What if the self you spend your whole life defending is not what you think it is?
+        </p>
+        <div className="font-sans text-[17px] md:text-[18px] leading-relaxed text-dark-text/80 space-y-5">
+          <p>
+            Every relationship, every ambition, every fear, every grievance, every prayer orbits around something we call &ldquo;I.&rdquo; We build entire lives around protecting it, improving it, proving it, escaping it.
+          </p>
+          <p>
+            This is not a question for monks or philosophers alone. Neuroscience, artificial intelligence, and consciousness studies have been circling it for decades &mdash; and the self remains stubbornly elusive. Science can map the brain, track neurotransmitters, and model behaviour. But it has not found the experiencer behind experience. The observer remains unlocated.
+          </p>
+          <p>
+            And yet, when we look closely &mdash; not philosophically, not scientifically, but carefully &mdash; at the thing we call &ldquo;self,&rdquo; we may find something far more fluid, far more dependent, and far less solid than we assumed.
+          </p>
+          <p>
+            This is not a minor observation. It changes how we experience suffering, how we relate to other people, how we hold our beliefs, and what we think death means.
+          </p>
+          <p className="font-serif text-xl md:text-2xl text-dark-text font-semibold leading-relaxed">
+            Emptiness is not a denial of life. It is the opening through which life can finally be seen as it is.
+          </p>
         </div>
       </div>
     </section>
