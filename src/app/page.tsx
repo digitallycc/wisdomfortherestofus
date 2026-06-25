@@ -89,6 +89,9 @@ function HeroSection() {
             {hero.tagline}
           </p>
           <div className="mb-6 pl-4 border-l-2 border-accent/40">
+            <p className="font-sans text-xs font-semibold uppercase tracking-widest text-accent mb-2">
+              Featured Book
+            </p>
             <p className="font-serif text-lg md:text-xl font-semibold text-text mb-1">
               {book.title}
             </p>
