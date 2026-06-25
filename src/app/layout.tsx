@@ -32,6 +32,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: site.name,
     url: site.url,
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — ${site.tagline}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
