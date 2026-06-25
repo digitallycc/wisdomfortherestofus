@@ -150,9 +150,15 @@ function WisdomWithoutConversionSection() {
       <EditorialSection title={wisdomWithoutConversion.title}>
         <p>{wisdomWithoutConversion.body}</p>
         <p>{wisdomWithoutConversion.note}</p>
-        <PullQuote className="my-6">
+        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mt-6 mb-2">
+          Openness asks:
+        </p>
+        <PullQuote className="mb-4">
           &ldquo;{wisdomWithoutConversion.opennessQuestion}&rdquo;
         </PullQuote>
+        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mt-6 mb-2">
+          Honesty asks:
+        </p>
         <PullQuote className="mb-6">
           &ldquo;{wisdomWithoutConversion.honestyQuestion}&rdquo;
         </PullQuote>
