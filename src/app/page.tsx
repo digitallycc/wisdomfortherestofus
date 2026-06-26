@@ -318,11 +318,11 @@ function ReadFreeSection() {
         </SectionHeading>
         <blockquote className="mb-8">
           <p className="font-serif text-lg md:text-xl leading-relaxed text-dark-text/80 italic">
-            &ldquo;An accessible, warmhearted presentation of the central ideas of
+            &ldquo;An accessible, warm-hearted presentation of the central ideas of
             Madhyamaka metaphysics and of their ethical implications.&rdquo;
           </p>
           <cite className="not-italic font-sans text-sm text-dark-text/50 block mt-2">
-            Jay L. Garfield, Smith College &middot; University of Melbourne
+            Jay L. Garfield, Smith College &middot; Harvard Divinity School
           </cite>
         </blockquote>
         <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-dark-text/80 mb-6">

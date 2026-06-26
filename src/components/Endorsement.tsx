@@ -7,7 +7,7 @@ export default function Endorsement() {
         </p>
         <blockquote className="text-center">
           <p className="font-serif text-xl md:text-2xl lg:text-[1.65rem] leading-relaxed md:leading-relaxed text-text">
-            &ldquo;An accessible, warmhearted presentation of the central ideas of
+            &ldquo;An accessible, warm-hearted presentation of the central ideas of
             Madhyamaka metaphysics and of their ethical implications. Muhammad Ibrahim
             has found the perfect voice in which to encourage people to take these
             ideas seriously, regardless of their religious or ideological commitments.
@@ -23,7 +23,7 @@ export default function Endorsement() {
                 Professor Emeritus of Philosophy, Smith College
               </span>
               <span className="font-sans text-sm text-muted block">
-                Professor of Philosophy, University of Melbourne
+                Visiting Professor of Buddhist Philosophy, Harvard Divinity School
               </span>
             </cite>
           </footer>
