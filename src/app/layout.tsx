@@ -3,6 +3,7 @@ import { Source_Serif_4, Inter } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ScrollToTop from "@/components/ScrollToTop";
 import { site } from "@/content/site";
 
 const sourceSerif = Source_Serif_4({
@@ -80,6 +81,7 @@ export default function RootLayout({
           {children}
         </main>
         <SiteFooter />
+        <ScrollToTop />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

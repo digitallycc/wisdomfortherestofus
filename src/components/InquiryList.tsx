@@ -1,4 +1,5 @@
 import { reviewerSection } from "@/content/home";
+import { site } from "@/content/site";
 
 export default function InquiryList() {
   return (
@@ -19,9 +20,19 @@ export default function InquiryList() {
           </li>
         ))}
       </ul>
-      <p className="font-sans text-sm italic text-muted">
+      <p className="font-sans text-sm italic text-muted mb-6">
         {reviewerSection.note}
       </p>
+      <div className="border-t border-border pt-6">
+        <p className="font-sans text-sm text-muted">{site.author.name}</p>
+        <p className="font-sans text-sm text-muted">{site.author.location}</p>
+        <a
+          href={`mailto:${site.author.email}?subject=Inquiry%20via%20Wisdom%20for%20the%20Rest%20of%20Us`}
+          className="font-sans text-sm text-accent hover:text-accent-light transition-colors underline"
+        >
+          {site.author.email}
+        </a>
+      </div>
     </div>
   );
 }
