@@ -7,6 +7,7 @@ import QuestionCard from "@/components/QuestionCard";
 import BookContents from "@/components/BookContents";
 import AuthorProfile from "@/components/AuthorProfile";
 import PlatformPrinciples from "@/components/PlatformPrinciples";
+import Endorsement from "@/components/Endorsement";
 import InquiryList from "@/components/InquiryList";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { book } from "@/content/book";
@@ -37,6 +38,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <Endorsement />
       <SelfInquirySection />
       <EmptinessExplanationSection />
       <WhyBuddhismSection />
@@ -314,6 +316,15 @@ function ReadFreeSection() {
         <SectionHeading className="mb-4 text-dark-text">
           Read the book free
         </SectionHeading>
+        <blockquote className="mb-8">
+          <p className="font-serif text-lg md:text-xl leading-relaxed text-dark-text/80 italic">
+            &ldquo;An accessible, warmhearted presentation of the central ideas of
+            Madhyamaka metaphysics and of their ethical implications.&rdquo;
+          </p>
+          <cite className="not-italic font-sans text-sm text-dark-text/50 block mt-2">
+            Jay L. Garfield, Smith College &middot; University of Melbourne
+          </cite>
+        </blockquote>
         <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-dark-text/80 mb-6">
           The complete book is available through Internet Archive. You can read
           it online, download it, and share the original edition under its
