@@ -33,11 +33,11 @@ export default function SiteHeader() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-5">
-      <div className="mx-auto flex max-w-5xl items-center justify-between rounded-[1.2rem] border border-white/10 bg-[#171615]/92 px-3 py-2 text-dark-text shadow-[0_12px_38px_rgba(0,0,0,.24)] backdrop-blur-xl md:rounded-full md:px-4">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-5">
+      <div className="mx-auto flex max-w-5xl items-center justify-end text-dark-text md:pointer-events-auto md:justify-between md:rounded-full md:border md:border-white/10 md:bg-[#171615]/92 md:px-4 md:py-2 md:shadow-[0_12px_38px_rgba(0,0,0,.24)] md:backdrop-blur-xl">
         <Link
           href="/"
-          className="flex items-center gap-3 rounded-full pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rust-light"
+          className="hidden items-center gap-3 rounded-full pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rust-light md:flex"
           aria-label={`${site.name} home`}
         >
           <span className="grid h-9 w-9 place-items-center rounded-full bg-paper font-serif text-xl font-semibold text-text">
@@ -74,7 +74,7 @@ export default function SiteHeader() {
 
         <button
           type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-white/12 md:hidden"
+          className="pointer-events-auto flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full border border-white/15 bg-[#171615]/94 shadow-[0_10px_30px_rgba(0,0,0,.28)] backdrop-blur-xl md:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
@@ -88,7 +88,7 @@ export default function SiteHeader() {
       {menuOpen && (
         <nav
           id="mobile-menu"
-          className="mx-auto mt-2 max-w-5xl rounded-[1.5rem] border border-white/10 bg-[#171615]/98 p-4 text-dark-text shadow-2xl backdrop-blur-xl md:hidden"
+          className="pointer-events-auto mx-auto mt-2 max-w-5xl rounded-[1.5rem] border border-white/10 bg-[#171615]/98 p-4 text-dark-text shadow-2xl backdrop-blur-xl md:hidden"
           aria-label="Mobile navigation"
         >
           <div className="flex flex-col gap-1">

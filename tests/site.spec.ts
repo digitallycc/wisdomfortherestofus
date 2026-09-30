@@ -87,6 +87,37 @@ test.describe("Navigation and responsiveness", () => {
     await expect(mobileNav).toBeHidden();
   });
 
+  test("mobile hero links remain tappable above decorative layers", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    await page.getByRole("link", { name: /begin with the opening/i }).click();
+    await expect(page).toHaveURL(/\/read\/opening\/$/);
+
+    await page.goto("/");
+    await page.getByRole("link", { name: /explore the book/i }).click();
+    await expect(page).toHaveURL(/\/book\/$/);
+  });
+
+  test("mobile meaning cards do not overlap", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    const questionCard = page
+      .getByText(
+        "What if the self you spend your whole life defending is not what you think it is?",
+        { exact: true },
+      )
+      .locator("..");
+    const insightCard = page.getByText(/Every relationship, ambition/).locator("..");
+    const questionBox = await questionCard.boundingBox();
+    const insightBox = await insightCard.boundingBox();
+
+    expect(questionBox).not.toBeNull();
+    expect(insightBox).not.toBeNull();
+    expect(insightBox!.y).toBeGreaterThanOrEqual(questionBox!.y + questionBox!.height);
+  });
+
   for (const width of [360, 390, 768, 1024, 1440]) {
     test(`has no horizontal overflow at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 800 });

@@ -262,6 +262,7 @@ html {
 @media (max-width: 767px) {
   .cinematic-hero::after {
     position: absolute;
+    pointer-events: none;
     right: -20%;
     bottom: -5%;
     width: 90%;

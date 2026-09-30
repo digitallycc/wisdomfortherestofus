@@ -154,14 +154,14 @@ export default function HomePage() {
       <section className="overflow-hidden bg-paper px-6 py-20 md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-12 md:grid-cols-[0.95fr_1.05fr] md:items-center">
-            <div className="relative min-h-[430px]">
-              <div className="absolute left-0 top-4 w-[72%] rounded-[2rem] bg-dark-bg p-8 text-dark-text shadow-2xl md:p-10">
+            <div className="grid gap-4 md:relative md:block md:min-h-[430px]">
+              <div className="relative w-full rounded-[2rem] bg-dark-bg p-8 text-dark-text shadow-2xl md:absolute md:left-0 md:top-4 md:w-[72%] md:p-10">
                 <p className="eyebrow text-rust-light">The question</p>
                 <p className="mt-6 font-serif text-3xl leading-tight md:text-4xl">
                   What if the self you spend your whole life defending is not what you think it is?
                 </p>
               </div>
-              <div className="insight-card absolute bottom-0 right-0 w-[70%] rounded-[2rem] p-7">
+              <div className="insight-card relative w-full rounded-[2rem] p-7 md:absolute md:bottom-0 md:right-0 md:w-[70%]">
                 <p className="font-sans text-sm leading-relaxed text-[#514943]">
                   Every relationship, ambition, fear, grievance, and prayer orbits something we call “I.” The book asks us to look for it carefully.
                 </p>
