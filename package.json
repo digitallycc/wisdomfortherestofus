@@ -1,12 +1,15 @@
 {
-  "name": "temp-next",
+  "name": "wisdom-for-the-rest-of-us",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cloudflare:types": "wrangler types worker-configuration.d.ts",
+    "cloudflare:preview": "npm run build && wrangler pages dev out",
+    "metrics": "wrangler d1 execute wisdom-site-analytics --remote --command \"SELECT event_name, COUNT(*) AS total_events, COUNT(DISTINCT anonymous_id) AS unique_readers, MIN(occurred_at) AS first_event, MAX(occurred_at) AS latest_event FROM reader_events GROUP BY event_name ORDER BY event_name;\""
   },
   "dependencies": {
     "next": "16.2.9",
@@ -22,6 +25,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.144.0"
   }
 }

@@ -1,121 +1,118 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { site, navigation, internetArchiveUrl } from "@/content/site";
-import ExternalLink from "./ExternalLink";
+import { usePathname } from "next/navigation";
+import { internetArchiveUrl, navigation, site } from "@/content/site";
+import TrackedArchiveLink from "./TrackedArchiveLink";
 
 export default function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    if (!menuOpen) return;
 
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = "hidden";
+    firstLinkRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, [menuOpen]);
 
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href.replace(/\/$/, ""));
+  };
+
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-shadow ${
-        scrolled ? "shadow-sm bg-background/95 backdrop-blur-sm" : "bg-background"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-5">
+      <div className="mx-auto flex max-w-5xl items-center justify-between rounded-[1.2rem] border border-white/10 bg-[#171615]/92 px-3 py-2 text-dark-text shadow-[0_12px_38px_rgba(0,0,0,.24)] backdrop-blur-xl md:rounded-full md:px-4">
         <Link
           href="/"
-          className="font-serif text-xl md:text-2xl font-semibold text-text hover:text-accent transition-colors"
+          className="flex items-center gap-3 rounded-full pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rust-light"
+          aria-label={`${site.name} home`}
         >
-          {site.name}
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-paper font-serif text-xl font-semibold text-text">
+            ◌
+          </span>
+          <span className="hidden font-serif text-sm font-semibold tracking-wide sm:inline md:text-base">
+            {site.name}
+          </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
           {navigation.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-sans text-sm font-medium text-muted hover:text-text transition-colors"
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`rounded-full px-4 py-2 font-sans text-xs font-semibold transition-colors ${
+                isActive(link.href)
+                  ? "bg-paper text-[#1a1a1a]"
+                  : "text-dark-text/62 hover:bg-white/8 hover:text-dark-text"
+              }`}
             >
               {link.label}
             </Link>
           ))}
-          <ExternalLink
+          <TrackedArchiveLink
             href={internetArchiveUrl}
-            className="font-sans text-sm font-semibold bg-accent text-white px-5 py-2.5 rounded-sm hover:bg-accent-light transition-colors"
+            source="header"
+            className="ml-1 rounded-full border border-rust-light/60 px-4 py-2 font-sans text-xs font-semibold text-dark-text transition-colors hover:bg-accent"
           >
-            Read Free
-          </ExternalLink>
+            Full edition ↗
+          </TrackedArchiveLink>
         </nav>
 
         <button
           type="button"
-          className="md:hidden flex flex-col gap-1.5 p-2 -mr-2 focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-white/12 md:hidden"
+          onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
-          <span
-            className={`block w-6 h-0.5 bg-text transition-transform ${
-              menuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-text transition-opacity ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-text transition-transform ${
-              menuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
+          <span className={`block h-px w-5 bg-dark-text transition-transform ${menuOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
+          <span className={`block h-px w-5 bg-dark-text transition-transform ${menuOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`} />
         </button>
       </div>
 
       {menuOpen && (
-        <MobileNav onClose={() => setMenuOpen(false)} />
+        <nav
+          id="mobile-menu"
+          className="mx-auto mt-2 max-w-5xl rounded-[1.5rem] border border-white/10 bg-[#171615]/98 p-4 text-dark-text shadow-2xl backdrop-blur-xl md:hidden"
+          aria-label="Mobile navigation"
+        >
+          <div className="flex flex-col gap-1">
+            {navigation.map((link, index) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                ref={index === 0 ? firstLinkRef : undefined}
+                className="rounded-xl px-4 py-3 font-sans text-base text-dark-text/78 hover:bg-white/8 hover:text-dark-text"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <TrackedArchiveLink
+              href={internetArchiveUrl}
+              source="mobile_header"
+              className="mt-2 rounded-xl bg-paper px-4 py-3 text-center font-sans text-sm font-semibold text-text"
+            >
+              Complete edition on Archive ↗
+            </TrackedArchiveLink>
+          </div>
+        </nav>
       )}
     </header>
-  );
-}
-
-function MobileNav({ onClose }: { onClose: () => void }) {
-  return (
-    <nav
-      id="mobile-menu"
-      className="md:hidden border-t border-border bg-background"
-      aria-label="Mobile navigation"
-    >
-      <div className="flex flex-col px-6 py-4 space-y-4">
-        {navigation.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="font-sans text-base font-medium text-muted hover:text-text transition-colors py-2"
-            onClick={onClose}
-          >
-            {link.label}
-          </Link>
-        ))}
-        <ExternalLink
-          href={internetArchiveUrl}
-          className="font-sans text-base font-semibold bg-accent text-white px-5 py-3 rounded-sm hover:bg-accent-light transition-colors text-center"
-        >
-          Read the Book Free
-        </ExternalLink>
-      </div>
-    </nav>
   );
 }

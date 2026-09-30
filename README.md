@@ -9,6 +9,7 @@ A calm, credible, highly readable static website for serious inquiry into univer
 - Tailwind CSS v4
 - React Server Components
 - Static export (`output: 'export'`)
+- Cloudflare Pages Functions + D1 for anonymous reading metrics
 
 ## Getting Started
 
@@ -52,14 +53,18 @@ npx playwright test
 
 ### Static Export
 
-The site is configured for full static export. Upload the contents of the `out/` directory to any static hosting provider.
+The reading experience is a static export, but the anonymous event endpoint uses
+Cloudflare Pages Functions and D1. Other static hosts can serve the pages, but the
+reader metrics will require an equivalent serverless endpoint.
 
 ### Cloudflare Pages
 
-1. Connect your GitHub repository
-2. Build command: `npm run build`
-3. Build output directory: `out`
-4. Framework preset: Next.js (static)
+1. Connect the GitHub repository.
+2. Build command: `npm run build`.
+3. Build output directory: `out`.
+4. Framework preset: Next.js (static).
+5. Keep the D1 binding named `DB`; its database ID is already recorded in
+   `wrangler.jsonc`.
 
 ### Netlify
 
@@ -98,6 +103,7 @@ All website copy is stored in structured TypeScript data files under `src/conten
 - `site.ts` — site-wide configuration and navigation
 - `book.ts` — book metadata, contents, and questions
 - `home.ts` — homepage section copy
+- `readings.json` — the responsive opening and Chapter One text
 
 To edit copy, modify the relevant content file. No JSX rewriting needed.
 
@@ -110,12 +116,40 @@ To edit copy, modify the relevant content file. No JSX rewriting needed.
 - Visible focus states
 - Reduced motion support
 
-## Analytics
+## Reader Analytics
 
-No analytics are installed. To add privacy-respecting analytics later (e.g., Plausible, Umami), add the tracking script to `src/app/layout.tsx`.
+The site records a deliberately small set of anonymous events in Cloudflare D1:
+
+- opening and Chapter One started
+- opening and Chapter One meaningfully read
+- opening and Chapter One completed
+- clicks to the complete edition on Internet Archive
+
+The anonymous reader ID is generated in the browser and stored in local storage.
+No name, email address, cookie, fingerprint, or full IP address is stored. Read
+events are de-duplicated per browser; archive clicks are counted individually.
+
+Apply the D1 migration when setting up a fresh environment:
+
+```bash
+npx wrangler d1 migrations apply wisdom-site-analytics --remote
+```
+
+Retrieve the current totals and distinct-reader counts:
+
+```bash
+npm run metrics
+```
+
+For a production-like local preview with the Pages Function and local D1:
+
+```bash
+npm run build
+npx wrangler d1 migrations apply wisdom-site-analytics --local
+npx wrangler pages dev out
+```
 
 ## Notes
 
-- The book cover image at `public/images/book-cover.svg` is a placeholder. Replace with the actual supplied book cover (WebP preferred).
-- The OG image at `public/images/og-image.svg` is a placeholder. Replace with a proper 1200x630 image.
-- The `apple-touch-icon.svg` should be replaced with a 180x180 PNG.
+- The full book remains canonically hosted by Internet Archive.
+- `hero-atmosphere.webp`, `book-cover.webp`, and `og-image.jpg` are production assets.

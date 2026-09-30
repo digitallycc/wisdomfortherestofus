@@ -1,409 +1,257 @@
 import type { Metadata } from "next";
-import SectionHeading from "@/components/SectionHeading";
-import EditorialSection from "@/components/EditorialSection";
-import PrimaryCTA from "@/components/PrimaryCTA";
-import PullQuote from "@/components/PullQuote";
-import QuestionCard from "@/components/QuestionCard";
-import BookContents from "@/components/BookContents";
-import AuthorProfile from "@/components/AuthorProfile";
-import PlatformPrinciples from "@/components/PlatformPrinciples";
-import Endorsement from "@/components/Endorsement";
-import InquiryList from "@/components/InquiryList";
-import NewsletterSignup from "@/components/NewsletterSignup";
+import Image from "next/image";
+import Link from "next/link";
+import TrackedArchiveLink from "@/components/TrackedArchiveLink";
 import { book } from "@/content/book";
-import {
-  hero,
-  emptinessExplanation,
-  whyBuddhism,
-  wisdomWithoutConversion,
-  whoWeAre,
-  bookJourney,
-  finalQuestion,
-  essaysList,
-} from "@/content/home";
-import { site } from "@/content/site";
+import { finalQuestion } from "@/content/home";
+import { internetArchiveUrl, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: site.name,
+  title: {
+    absolute: `${book.title} — A Free Inquiry Into Self, Suffering, and Change`,
+  },
   description:
-    "A home for serious inquiry into universal wisdom without conversion, jargon, or borrowed identity. Read Emptiness for the Rest of Us free.",
+    "Read Emptiness for the Rest of Us free. A clear inquiry into the self, suffering, and change, drawn from Buddhism and explored by a Muslim author.",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: `${site.name} \u2014 Serious Ideas for Ordinary Human Lives`,
-    description:
-      "A home for serious inquiry into universal wisdom without conversion, jargon, or borrowed identity. Read Emptiness for the Rest of Us free.",
+    title: `${book.title} — ${book.subtitle}`,
+    description: book.description,
+    url: site.url,
   },
 };
 
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
-      <Endorsement />
-      <SelfInquirySection />
-      <EmptinessExplanationSection />
-      <WhyBuddhismSection />
-      <WisdomWithoutConversionSection />
-      <WhoWeAreSection />
-      <BookJourneySection />
-      <QuestionsSection />
-      <AuthorSection />
-      <PlatformSection />
-      <ReadFreeSection />
-      <ContentsSection />
-      <ReviewerSection />
-      <EssaysSection />
-      <FinalQuestionSection />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Book",
-              name: book.title,
-              author: {
-                "@type": "Person",
-                name: site.author.name,
-              },
-              datePublished: book.published,
-              genre: book.genre,
-              inLanguage: book.language,
-              url: `${site.url}/#book`,
-              sameAs: "https://archive.org/details/emptiness-for-the-rest-of-us-pdf",
-              license: book.license,
-            }),
-          }}
+      <section className="cinematic-hero relative min-h-[calc(100svh-4rem)] overflow-hidden bg-dark-bg text-dark-text">
+        <Image
+          src="/images/hero-atmosphere.webp"
+          alt="A solitary empty chair in a wide surreal landscape of stone, paper, light, and translucent connected planes."
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[62%_center]"
         />
-      </>
-  );
-}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(23,22,21,.98)_0%,rgba(23,22,21,.88)_37%,rgba(23,22,21,.26)_72%,rgba(23,22,21,.08)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/75 via-transparent to-dark-bg/25" />
+        <div className="ambient-grid absolute inset-0 opacity-30" aria-hidden="true" />
 
-function HeroSection() {
-  return (
-    <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <SectionHeading as="h1" className="mb-3">
-            {site.name}
-          </SectionHeading>
-          <p className="font-serif text-xl md:text-2xl leading-relaxed text-muted mb-6">
-            {site.tagline}
-          </p>
-          <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-6">
-            {hero.tagline}
-          </p>
-          <div className="mb-6 pl-4 border-l-2 border-accent/40">
-            <p className="font-sans text-xs font-semibold uppercase tracking-widest text-accent mb-2">
-              Featured Book
+        <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-7xl items-center px-6 py-20 md:px-10 md:py-24">
+          <div className="max-w-3xl">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.3em] text-rust-light">
+              A free book · No conversion required
             </p>
-            <p className="font-serif text-lg md:text-xl font-semibold text-text mb-1">
-              {book.title}
+            <h1 className="mt-6 text-balance font-serif text-5xl font-semibold leading-[0.9] md:text-7xl lg:text-[6.5rem]">
+              Emptiness
+              <span className="block text-dark-text/62">for the Rest of Us</span>
+            </h1>
+            <p className="mt-6 font-serif text-2xl italic text-dark-text/65 md:text-3xl">
+              Seeing the Folly of “I”
             </p>
-            <p className="font-serif text-base italic text-muted mb-2">
-              {book.subtitle}
+            <p className="mt-8 max-w-xl font-sans text-lg leading-relaxed text-dark-text/78 md:text-xl">
+              What if the self you spend your whole life defending is not as solid as it feels?
             </p>
-            <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-muted">
-              {book.description}
+
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/read/opening/" className="button-light">
+                Begin with the opening →
+              </Link>
+              <Link href="/book/" className="button-outline-dark">
+                Explore the book
+              </Link>
+            </div>
+
+            <p className="mt-5 font-sans text-sm text-dark-text/48">
+              Read online in responsive text · complete edition on Internet Archive
             </p>
           </div>
-          <PrimaryCTA className="mb-3" />
-          <p className="font-sans text-sm text-muted">
-            {hero.secondaryText}
-          </p>
+
+          <div className="absolute bottom-8 right-5 hidden w-[320px] lg:block xl:right-10">
+            <div className="paper-card rotate-2 rounded-[2rem] p-3 shadow-[0_28px_80px_rgba(0,0,0,.55)]">
+              <div className="grid grid-cols-[94px_1fr] gap-4 rounded-[1.45rem] bg-paper p-4">
+                <Image
+                  src="/images/book-cover.webp"
+                  alt="Cover of Emptiness for the Rest of Us by Muhammad Ibrahim."
+                  width={160}
+                  height={240}
+                  className="h-full w-full rounded-xl object-cover"
+                />
+                <div className="flex flex-col justify-between py-1">
+                  <div>
+                    <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                      The first inquiry
+                    </p>
+                    <p className="mt-2 font-serif text-2xl font-semibold leading-none text-text">
+                      The Phantom in the Room
+                    </p>
+                  </div>
+                  <Link href="/read/opening/" className="font-sans text-xs font-semibold text-accent">
+                    Read now →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute right-[27rem] top-[18%] hidden max-w-[250px] rounded-[1.5rem] border border-white/10 bg-black/20 p-5 backdrop-blur-md xl:block">
+            <p className="font-serif text-lg leading-relaxed text-dark-text/82">
+              “The movement is from understanding to seeing, and from seeing to living.”
+            </p>
+          </div>
         </div>
-        <div>
-          <img
-            src="/images/book-cover.webp"
-            alt="Cover of Emptiness for the Rest of Us by Muhammad Ibrahim, showing an empty meditating robe beneath a moonlit sky."
-            width={400}
-            height={600}
-            className="w-full max-w-xs mx-auto rounded-sm shadow-lg"
-          />
+      </section>
+
+      <section className="relative z-10 -mt-1 border-b border-border bg-background px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div className="lg:sticky lg:top-32">
+              <p className="eyebrow">Choose an entrance</p>
+              <h2 className="mt-4 max-w-lg font-serif text-4xl font-semibold leading-[1.02] md:text-6xl">
+                Begin with the question—or with the reasoning.
+              </h2>
+              <p className="mt-6 max-w-md font-sans text-lg leading-relaxed text-muted">
+                The book opens personally before it becomes philosophical. Both paths are available here as comfortable, responsive reading pages.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <Link href="/read/opening/" className="editorial-card group min-h-[430px]">
+                <span className="card-number">01</span>
+                <div className="mt-auto pt-24">
+                  <p className="eyebrow">Begin with the question</p>
+                  <h3 className="mt-3 font-serif text-4xl font-semibold leading-none">
+                    The Phantom in the Room
+                  </h3>
+                  <p className="mt-5 font-sans leading-relaxed text-muted">
+                    The actual opening of the book: why the burden of being someone deserves examination.
+                  </p>
+                  <span className="mt-8 inline-block font-sans text-sm font-semibold text-accent">
+                    Read the opening · 8 min →
+                  </span>
+                </div>
+              </Link>
+
+              <Link href="/read/chapter-one/" className="editorial-card group min-h-[430px] md:translate-y-12">
+                <span className="card-number">02</span>
+                <div className="mt-auto pt-24">
+                  <p className="eyebrow">The Lamp of Inquiry</p>
+                  <h3 className="mt-3 font-serif text-4xl font-semibold leading-none">
+                    The Illusion of the Obvious
+                  </h3>
+                  <p className="mt-5 font-sans leading-relaxed text-muted">
+                    Start with a chair. Follow its parts, conditions, names, and uses into the hidden web beneath apparent solidity.
+                  </p>
+                  <span className="mt-8 inline-block font-sans text-sm font-semibold text-accent">
+                    Read Chapter One · 18 min →
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function SelfInquirySection() {
-  return (
-    <section className="bg-dark-bg text-dark-text py-20 md:py-28">
-      <div className="max-w-prose mx-auto px-6 md:px-8">
-        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mb-6">
-          The question
-        </p>
-        <p className="font-serif text-2xl md:text-4xl leading-snug font-semibold mb-8">
-          What if the self you spend your whole life defending is not what you think it is?
-        </p>
-        <div className="font-sans text-[17px] md:text-[18px] leading-relaxed text-dark-text/80 space-y-5">
-          <p>
-            Every relationship, every ambition, every fear, every grievance, every prayer orbits around something we call &ldquo;I.&rdquo; We build entire lives around protecting it, improving it, proving it, escaping it.
-          </p>
-          <p>
-            This is not a question for monks or philosophers alone. Neuroscience, artificial intelligence, and consciousness studies have been circling it for decades &mdash; and the self remains stubbornly elusive. Science can map the brain, track neurotransmitters, and model behaviour. But it has not found the experiencer behind experience. The observer remains unlocated.
-          </p>
-          <p>
-            And yet, when we look closely &mdash; not philosophically, not scientifically, but carefully &mdash; at the thing we call &ldquo;self,&rdquo; we may find something far more fluid, far more dependent, and far less solid than we assumed.
-          </p>
-          <p>
-            This is not a minor observation. It changes how we experience suffering, how we relate to other people, how we hold our beliefs, and what we think death means.
-          </p>
-          <p className="font-serif text-xl md:text-2xl text-dark-text font-semibold leading-relaxed">
-            Emptiness is not a denial of life. It is the opening through which life can finally be seen as it is.
-          </p>
+      <section className="overflow-hidden bg-paper px-6 py-20 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-12 md:grid-cols-[0.95fr_1.05fr] md:items-center">
+            <div className="relative min-h-[430px]">
+              <div className="absolute left-0 top-4 w-[72%] rounded-[2rem] bg-dark-bg p-8 text-dark-text shadow-2xl md:p-10">
+                <p className="eyebrow text-rust-light">The question</p>
+                <p className="mt-6 font-serif text-3xl leading-tight md:text-4xl">
+                  What if the self you spend your whole life defending is not what you think it is?
+                </p>
+              </div>
+              <div className="insight-card absolute bottom-0 right-0 w-[70%] rounded-[2rem] p-7">
+                <p className="font-sans text-sm leading-relaxed text-[#514943]">
+                  Every relationship, ambition, fear, grievance, and prayer orbits something we call “I.” The book asks us to look for it carefully.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <p className="eyebrow">What emptiness means here</p>
+              <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight md:text-6xl">
+                Not nothingness. Not a denial of life.
+              </h2>
+              <p className="mt-7 font-sans text-lg leading-relaxed text-muted">
+                Nothing—including the self—exists as a completely separate, fixed, and independent thing. A person depends on body, language, ancestry, relationship, culture, memory, habit, hope, grief, and change.
+              </p>
+              <p className="mt-5 font-serif text-2xl leading-relaxed text-text">
+                The self is not nothing. But it may not be the solid owner we have imagined. And if the self is not fixed, suffering may not be fixed either.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function EmptinessExplanationSection() {
-  return (
-    <section className="py-16 md:py-20">
-      <EditorialSection title={emptinessExplanation.title}>
-        <p>{emptinessExplanation.body}</p>
-        <PullQuote className="my-6">
-          {emptinessExplanation.precise}
-        </PullQuote>
-        {emptinessExplanation.examples.map((ex, i) => (
-          <p key={i}>{ex}</p>
-        ))}
-        <p>{emptinessExplanation.conclusion}</p>
-      </EditorialSection>
-    </section>
-  );
-}
-
-function WhyBuddhismSection() {
-  return (
-    <section className="bg-white border-y border-border py-16 md:py-20">
-      <EditorialSection title={whyBuddhism.title}>
-        <p>{whyBuddhism.body}</p>
-        <ul className="space-y-1 mt-4 mb-6">
-          {["the nature of the self", "the causes of suffering", "attachment and clinging", "dependent existence", "perception and mental construction", "the relationship between change and freedom", "the difference between experience and the stories built around it"].map((item) => (
-            <li key={item} className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted pl-4 relative before:content-['\2013'] before:absolute before:left-0 before:text-accent">
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p>{whyBuddhism.clarification}</p>
-      </EditorialSection>
-    </section>
-  );
-}
-
-function WisdomWithoutConversionSection() {
-  return (
-    <section className="py-16 md:py-20">
-      <EditorialSection title={wisdomWithoutConversion.title}>
-        <p>{wisdomWithoutConversion.body}</p>
-        <p>{wisdomWithoutConversion.note}</p>
-        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mt-6 mb-2">
-          Openness asks:
-        </p>
-        <PullQuote className="mb-4">
-          &ldquo;{wisdomWithoutConversion.opennessQuestion}&rdquo;
-        </PullQuote>
-        <p className="font-sans text-sm font-semibold uppercase tracking-widest text-accent mt-6 mb-2">
-          Honesty asks:
-        </p>
-        <PullQuote className="mb-6">
-          &ldquo;{wisdomWithoutConversion.honestyQuestion}&rdquo;
-        </PullQuote>
-        <p className="font-semibold text-text">
-          {wisdomWithoutConversion.closing}
-        </p>
-      </EditorialSection>
-    </section>
-  );
-}
-
-function WhoWeAreSection() {
-  return (
-    <section className="bg-white border-y border-border py-16 md:py-20">
-      <EditorialSection title={whoWeAre.title}>
-        <p>{whoWeAre.body}</p>
-        <p>
-          The rest of us are people with jobs, families, debts, and aging parents.
-          With uncertain futures, private regrets, old anger, and religious commitments.
-          With doubts, tired bodies, complicated relationships, and unfinished questions.
-          With minds that keep turning every experience into a story about &ldquo;me.&rdquo;
-        </p>
-        <p>{whoWeAre.conclusion}</p>
-      </EditorialSection>
-    </section>
-  );
-}
-
-function BookJourneySection() {
-  return (
-    <section className="py-16 md:py-20">
-      <EditorialSection title={bookJourney.title}>
-        <p className="font-serif text-xl font-semibold text-text">
-          {book.title}
-        </p>
-        <p className="font-serif text-lg italic text-muted mb-6">
-          {book.subtitle}
-        </p>
-      </EditorialSection>
-      <div className="max-w-prose mx-auto px-6 md:px-8 mt-8 space-y-8">
-        <div className="pl-6 border-l-4 border-accent/30">
-          <h3 className="font-serif text-lg font-semibold mb-2">
-            {bookJourney.partOne.title}
-          </h3>
-          <p className="font-sans text-sm italic text-muted mb-3">
-            {bookJourney.partOne.subtitle}
-          </p>
-          <p className="font-sans text-[17px] leading-relaxed text-muted">
-            {bookJourney.partOne.description}
-          </p>
+      <section className="border-y border-white/10 bg-dark-bg px-6 py-20 text-dark-text md:py-28">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="eyebrow text-rust-light">Praise for the book</p>
+          <blockquote>
+            <p className="mt-8 font-serif text-3xl leading-relaxed md:text-5xl md:leading-[1.24]">
+              “An accessible, warm-hearted presentation of the central ideas of Madhyamaka metaphysics and of their ethical implications. Muhammad Ibrahim has found the perfect voice in which to encourage people to take these ideas seriously, regardless of their religious or ideological commitments. It will be of real benefit to people who want to improve their lives along these lines, but who find technical presentations forbidding.”
+            </p>
+            <footer className="mt-8 font-sans text-sm text-dark-text/55">
+              <strong className="block text-base text-dark-text">Jay L. Garfield</strong>
+              Professor Emeritus of Philosophy, Smith College · Visiting Professor of Buddhist Philosophy, Harvard Divinity School
+            </footer>
+          </blockquote>
         </div>
-        <div className="pl-6 border-l-4 border-secondary/30">
-          <h3 className="font-serif text-lg font-semibold mb-2">
-            {bookJourney.partTwo.title}
-          </h3>
-          <p className="font-sans text-sm italic text-muted mb-3">
-            {bookJourney.partTwo.subtitle}
-          </p>
-          <p className="font-sans text-[17px] leading-relaxed text-muted">
-            {bookJourney.partTwo.description}
-          </p>
+      </section>
+
+      <section className="px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <p className="eyebrow">Four questions</p>
+          <div className="mt-8 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-2">
+            {book.questions.map((question, index) => (
+              <article key={question.title} className="bg-background p-7 md:p-10">
+                <span className="font-sans text-xs font-semibold text-accent">0{index + 1}</span>
+                <h2 className="mt-5 font-serif text-3xl font-semibold">{question.title}</h2>
+                <p className="mt-4 font-sans leading-relaxed text-muted">{question.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-      <EditorialSection className="mt-8">
-        <PullQuote>{bookJourney.transition}</PullQuote>
-      </EditorialSection>
-    </section>
-  );
-}
+      </section>
 
-function QuestionsSection() {
-  return (
-    <section className="bg-white border-y border-border py-16 md:py-20">
-      <div className="max-w-prose mx-auto px-6 md:px-8 mb-8">
-        <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-snug">
-          Some questions the book explores
-        </h2>
-      </div>
-      <div className="max-w-5xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {book.questions.map((q) => (
-          <QuestionCard key={q.title} title={q.title} body={q.body} />
-        ))}
-      </div>
-    </section>
-  );
-}
+      <section id="about" className="scroll-mt-28 border-y border-border bg-paper px-6 py-20 md:py-28">
+        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-[0.65fr_1.35fr]">
+          <div>
+            <p className="eyebrow">About the author</p>
+            <p className="mt-4 font-serif text-4xl font-semibold">Muhammad Ibrahim</p>
+            <p className="mt-2 font-sans text-sm text-muted">Islamabad, Pakistan</p>
+          </div>
+          <div className="space-y-5 font-sans text-lg leading-relaxed text-muted">
+            <p>
+              I am a Muslim from Pakistan in my late fifties. I do not write as a Buddhist monk, teacher, formal practitioner, historian, or academic specialist. I write as a reader, a thinker, and a human being who has spent many years examining questions of identity, suffering, belief, fear, purpose, and the burden of being someone.
+            </p>
+            <p>
+              I have deliberately not translated Buddhist emptiness into familiar Islamic vocabulary, nor tried to prove that Buddhism and Islam are secretly saying the same thing. This project proceeds with two commitments: to seek wisdom without fear, and to represent its source without dishonesty.
+            </p>
+          </div>
+        </div>
+      </section>
 
-function AuthorSection() {
-  return (
-    <section id="about" className="py-16 md:py-20 scroll-mt-20">
-      <AuthorProfile />
-    </section>
-  );
-}
-
-function PlatformSection() {
-  return (
-    <section className="bg-white border-y border-border py-16 md:py-20">
-      <PlatformPrinciples />
-    </section>
-  );
-}
-
-function ReadFreeSection() {
-  return (
-    <section className="bg-dark-bg text-dark-text py-16 md:py-20">
-      <div className="max-w-prose mx-auto px-6 md:px-8 text-center">
-        <SectionHeading className="mb-4 text-dark-text">
-          Read the book free
-        </SectionHeading>
-        <blockquote className="mb-8">
-          <p className="font-serif text-lg md:text-xl leading-relaxed text-dark-text/80 italic">
-            &ldquo;An accessible, warm-hearted presentation of the central ideas of
-            Madhyamaka metaphysics and of their ethical implications.&rdquo;
+      <section className="px-6 py-20 text-center md:py-28">
+        <div className="mx-auto max-w-4xl">
+          <p className="eyebrow">A final invitation</p>
+          <p className="mt-6 font-sans text-lg leading-relaxed text-muted">
+            {finalQuestion.invitation}
           </p>
-          <cite className="not-italic font-sans text-sm text-dark-text/50 block mt-2">
-            Jay L. Garfield, Smith College &middot; Harvard Divinity School
-          </cite>
-        </blockquote>
-        <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-dark-text/80 mb-6">
-          The complete book is available through Internet Archive. You can read
-          it online, download it, and share the original edition under its
-          Creative Commons licence.
-        </p>
-        <PrimaryCTA variant="dark" />
-        <p className="font-sans text-sm text-dark-text/60 mt-3">
-          No payment. No registration. No email required.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function ContentsSection() {
-  return (
-    <section className="py-16 md:py-20">
-      <BookContents />
-    </section>
-  );
-}
-
-function ReviewerSection() {
-  return (
-    <section id="contact" className="bg-white border-y border-border py-16 md:py-20 scroll-mt-20">
-      <InquiryList />
-    </section>
-  );
-}
-
-function EssaysSection() {
-  return (
-    <section id="essays" className="py-16 md:py-20 scroll-mt-20">
-      <div className="max-w-prose mx-auto px-6 md:px-8">
-        <SectionHeading className="mb-4">
-          Essays and continuing inquiries
-        </SectionHeading>
-        <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-muted mb-8">
-          The first essays on this platform will continue exploring questions
-          raised by the book:
-        </p>
-        <ul className="space-y-2 mb-8">
-          {essaysList.map((essay) => (
-            <li
-              key={essay}
-              className="font-serif text-base md:text-lg leading-relaxed text-muted pl-4 border-l-2 border-accent/30"
-            >
-              {essay}
-            </li>
-          ))}
-        </ul>
-        <p className="font-sans text-[17px] leading-relaxed text-muted mb-6">
-          Future work will follow the questions wherever they lead. The platform
-          is not committed to one tradition. But it is committed to taking every
-          source seriously enough not to reduce it to a slogan.
-        </p>
-        <NewsletterSignup />
-      </div>
-    </section>
-  );
-}
-
-function FinalQuestionSection() {
-  return (
-    <section className="bg-dark-bg text-dark-text py-16 md:py-20">
-      <div className="max-w-prose mx-auto px-6 md:px-8 text-center">
-        <SectionHeading as="h2" className="mb-6 text-dark-text">
-          A final invitation
-        </SectionHeading>
-        <p className="font-sans text-[17px] md:text-[18px] leading-relaxed text-dark-text/80 mb-8">
-          {finalQuestion.invitation}
-        </p>
-        <PullQuote className="text-dark-text border-dark-text/30 text-2xl md:text-3xl mb-6">
-          {finalQuestion.question}
-        </PullQuote>
-        <p className="font-sans text-base text-dark-text/60 italic">
-          {finalQuestion.instruction}
-        </p>
-      </div>
-    </section>
+          <h2 className="mt-8 font-serif text-4xl font-semibold leading-tight md:text-6xl">
+            {finalQuestion.question}
+          </h2>
+          <p className="mt-5 font-serif text-xl italic text-muted">{finalQuestion.instruction}</p>
+          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href="/read/opening/" className="button-dark">
+              Begin reading →
+            </Link>
+            <TrackedArchiveLink href={internetArchiveUrl} source="home_final" className="button-outline">
+              Complete edition ↗
+            </TrackedArchiveLink>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

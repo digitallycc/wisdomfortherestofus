@@ -15,13 +15,16 @@ export const site = {
 
 export const navigation = [
   { label: "Home", href: "/" },
-  { label: "Book", href: "/#book" },
+  { label: "The Book", href: "/book/" },
+  { label: "Opening", href: "/read/opening/" },
+  { label: "Chapter One", href: "/read/chapter-one/" },
   { label: "About", href: "/#about" },
-  { label: "Essays", href: "/#essays" },
-  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const internetArchiveUrl =
   "https://archive.org/details/emptiness-for-the-rest-of-us-pdf";
+
+export const internetArchivePdfUrl =
+  "https://archive.org/download/emptiness-for-the-rest-of-us-pdf/emptiness-for-the-rest-of-us-with_cover-internet_archive.pdf";
 
 export const contactEmail = "ibrahim@wisdomfortherestofus.com";

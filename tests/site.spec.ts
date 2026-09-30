@@ -1,124 +1,118 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const archiveUrl =
   "https://archive.org/details/emptiness-for-the-rest-of-us-pdf";
 
 test.describe("Homepage", () => {
-  test("loads successfully", async ({ page }) => {
+  test("presents the book and both reading entrances", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Wisdom for the Rest of Us/);
+
+    await expect(page).toHaveTitle(/Emptiness for the Rest of Us/);
+    await expect(
+      page.getByRole("heading", { name: /Emptiness for the Rest of Us/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /Begin with the opening/i }).first(),
+    ).toHaveAttribute("href", "/read/opening/");
+    await expect(
+      page.getByRole("link", { name: /Read Chapter One/i }),
+    ).toHaveAttribute("href", "/read/chapter-one/");
   });
 
-  test("primary CTA links to Internet Archive", async ({ page }) => {
+  test("keeps the complete edition available on Internet Archive", async ({
+    page,
+  }) => {
     await page.goto("/");
-    const cta = page.locator(`a[href="${archiveUrl}"]`).first();
-    await expect(cta).toBeVisible();
-    await expect(cta).toContainText("Read the Book Free");
-  });
-
-  test("navigation links are visible on desktop", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByRole("link", { name: "Book" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "About" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Essays" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Contact" })).toBeVisible();
+    const link = page.locator(`a[href="${archiveUrl}"]`).first();
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute("target", "_blank");
   });
 });
 
-test.describe("Mobile navigation", () => {
-  test("hamburger menu opens and closes", async ({ page }) => {
+test.describe("Reading paths", () => {
+  test("opening is a responsive web reading page", async ({ page }) => {
+    await page.goto("/read/opening/");
+    await expect(
+      page.getByRole("heading", { name: "The Phantom in the Room", exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText(/You may have opened this book because/)).toBeVisible();
+    await expect(page.getByRole("link", { name: /Continue reading/i })).toHaveAttribute(
+      "href",
+      "/read/chapter-one/",
+    );
+  });
+
+  test("Chapter One includes the complete chapter structure", async ({ page }) => {
+    await page.goto("/read/chapter-one/");
+    await expect(
+      page.getByRole("heading", { name: "The Illusion of the Obvious", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "The Chair Beneath Us", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "A First Glimpse", exact: true }),
+    ).toBeVisible();
+  });
+});
+
+test.describe("Book page", () => {
+  test("offers the web reading paths and archive formats", async ({ page }) => {
+    await page.goto("/book/");
+    await expect(
+      page.getByRole("heading", { name: "Emptiness for the Rest of Us", exact: true }),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: /Read the opening/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Download PDF/i })).toBeVisible();
+  });
+});
+
+test.describe("Navigation and responsiveness", () => {
+  test("desktop navigation exposes the reading routes", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Main navigation" });
+    await expect(nav.getByRole("link", { name: "The Book" })).toBeVisible();
+    await expect(nav.getByRole("link", { name: "Opening" })).toBeVisible();
+    await expect(nav.getByRole("link", { name: "Chapter One" })).toBeVisible();
+  });
+
+  test("mobile navigation opens and closes", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
 
-    const menuButton = page.getByRole("button", { name: "Open menu" });
-    await expect(menuButton).toBeVisible();
-
-    await menuButton.click();
-    await expect(page.getByRole("button", { name: "Close menu" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Book" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "About" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Essays" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Contact" })).toBeVisible();
-
-    const readCta = page.locator('a[href="' + archiveUrl + '"]').first();
-    await expect(readCta).toBeVisible();
+    await page.getByRole("button", { name: "Open menu" }).click();
+    const mobileNav = page.getByRole("navigation", { name: "Mobile navigation" });
+    await expect(mobileNav.getByRole("link", { name: "Opening" })).toBeVisible();
+    await page.getByRole("button", { name: "Close menu" }).click();
+    await expect(mobileNav).toBeHidden();
   });
-});
 
-test.describe("All primary routes", () => {
-  const routes = [
-    { path: "/", titlePattern: /Wisdom for the Rest of Us/ },
-    { path: "/about", titlePattern: /About/ },
-    { path: "/book/emptiness-for-the-rest-of-us", titlePattern: /Emptiness/ },
-    { path: "/essays", titlePattern: /Essays/ },
-    { path: "/contact", titlePattern: /Contact/ },
-    { path: "/privacy", titlePattern: /Privacy/ },
-  ];
-
-  for (const route of routes) {
-    test(`${route.path} returns 200 and has correct title`, async ({ page }) => {
-      const response = await page.goto(route.path);
-      expect(response?.status()).toBe(200);
-      await expect(page).toHaveTitle(route.titlePattern);
-    });
-  }
-});
-
-test.describe("No horizontal overflow", () => {
-  const widths = [360, 390, 768, 1024, 1440];
-
-  for (const width of widths) {
-    test(`no horizontal overflow at ${width}px`, async ({ page }) => {
+  for (const width of [360, 390, 768, 1024, 1440]) {
+    test(`has no horizontal overflow at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 800 });
       await page.goto("/");
-      const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
-      expect(bodyWidth).toBeLessThanOrEqual(width);
+      const widths = await page.evaluate(() => ({
+        body: document.body.scrollWidth,
+        viewport: document.documentElement.clientWidth,
+      }));
+      expect(widths.body).toBeLessThanOrEqual(widths.viewport);
     });
   }
 });
 
-test.describe("Keyboard navigation", () => {
-  test("skip-to-content link is present", async ({ page }) => {
+test.describe("Accessibility basics", () => {
+  test("skip link is present and becomes visible on focus", async ({ page }) => {
     await page.goto("/");
     const skipLink = page.locator(".skip-link");
     await expect(skipLink).toBeAttached();
-  });
-
-  test("skip-to-content link becomes visible on focus", async ({ page }) => {
-    await page.goto("/");
-    const skipLink = page.locator(".skip-link");
     await skipLink.focus();
     await expect(skipLink).toBeVisible();
   });
 
-  test("keyboard reaches primary CTA", async ({ page }) => {
-    await page.goto("/");
-    await page.keyboard.press("Tab");
-    await page.keyboard.press("Tab");
-    await page.keyboard.press("Tab");
-    const focusedEl = page.locator(":focus");
-    await expect(focusedEl).toBeVisible();
-  });
-});
-
-test.describe("Content integrity", () => {
-  test("homepage contains platform name", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("Wisdom for the Rest of Us").first()).toBeVisible();
-  });
-
-  test("homepage contains book title", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("Emptiness for the Rest of Us").first()).toBeVisible();
-  });
-
-  test("about page contains author name", async ({ page }) => {
-    await page.goto("/about");
-    await expect(page.getByText("Muhammad Ibrahim")).toBeVisible();
-  });
-
-  test("contact page has email link", async ({ page }) => {
-    await page.goto("/contact");
-    await expect(page.getByRole("link", { name: /ibrahim@wisdomfortherestofus\.com/ })).toBeVisible();
+  test("all key pages have one main heading", async ({ page }) => {
+    for (const path of ["/", "/book/", "/read/opening/", "/read/chapter-one/"]) {
+      await page.goto(path);
+      await expect(page.locator("h1")).toHaveCount(1);
+    }
   });
 });
