@@ -1,21 +1,16 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
-	"name": "wisdom-for-the-rest-of-us",
+	"name": "wisdomfortherestofus",
 	"pages_build_output_dir": "./out",
 	"compatibility_date": "2026-09-30",
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
-	"observability": {
-		"enabled": true,
-		"head_sampling_rate": 1
-	},
 	"d1_databases": [
 		{
 			"binding": "DB",
 			"database_name": "wisdom-site-analytics",
 			"database_id": "61e48614-1d84-4fb4-a5ec-40e978e7f330",
-			"preview_database_id": "DB",
 			"migrations_dir": "migrations"
 		}
 	]
