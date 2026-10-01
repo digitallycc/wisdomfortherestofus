@@ -131,11 +131,17 @@ test.describe("Navigation and responsiveness", () => {
       await page.goto("/");
 
       const card = page.locator(".cinematic-hero .paper-card").locator("..");
+      const prompt = page
+        .getByText(/What if the self you spend your whole life defending is not as solid/i)
+        .first();
       const box = await card.boundingBox();
+      const promptBox = await prompt.boundingBox();
 
       expect(box).not.toBeNull();
+      expect(promptBox).not.toBeNull();
       expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height - 48);
-      expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width * 0.76);
+      expect(box!.x).toBeGreaterThanOrEqual(promptBox!.x + promptBox!.width + 24);
+      expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width * 0.82);
     });
   }
 

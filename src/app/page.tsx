@@ -66,13 +66,13 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div
-            className="absolute hidden w-[260px] xl:block 2xl:w-[320px]"
-            style={{
-              right: "clamp(20rem, 25vw, 30rem)",
-              bottom: "max(4rem, calc(100% - 100svh + 4rem))",
-            }}
-          >
+          <div className="absolute left-[58%] top-[18%] hidden w-[260px] flex-col gap-6 xl:flex 2xl:w-[320px]">
+            <div className="w-full rounded-[1.5rem] border border-white/10 bg-black/20 p-5 backdrop-blur-md">
+              <p className="font-serif text-lg leading-relaxed text-dark-text/82">
+                “The movement is from understanding to seeing, and from seeing to living.”
+              </p>
+            </div>
+
             <div className="paper-card rotate-2 rounded-[2rem] p-2.5 shadow-[0_28px_80px_rgba(0,0,0,.55)] 2xl:p-3">
               <div className="grid grid-cols-[72px_1fr] gap-3 rounded-[1.45rem] bg-paper p-3 2xl:grid-cols-[94px_1fr] 2xl:gap-4 2xl:p-4">
                 <Image
@@ -97,12 +97,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="absolute right-[27rem] top-[18%] hidden max-w-[250px] rounded-[1.5rem] border border-white/10 bg-black/20 p-5 backdrop-blur-md xl:block">
-            <p className="font-serif text-lg leading-relaxed text-dark-text/82">
-              “The movement is from understanding to seeing, and from seeing to living.”
-            </p>
           </div>
         </div>
       </section>
