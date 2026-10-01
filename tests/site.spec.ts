@@ -118,6 +118,49 @@ test.describe("Navigation and responsiveness", () => {
     expect(insightBox!.y).toBeGreaterThanOrEqual(questionBox!.y + questionBox!.height);
   });
 
+  for (const viewport of [
+    { width: 1280, height: 720 },
+    { width: 1366, height: 768 },
+    { width: 1440, height: 900 },
+    { width: 1870, height: 932 },
+  ]) {
+    test(`keeps the hero inquiry card above the fold at ${viewport.width}x${viewport.height}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+
+      const card = page.locator(".cinematic-hero .paper-card").locator("..");
+      const box = await card.boundingBox();
+
+      expect(box).not.toBeNull();
+      expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height - 48);
+      expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width * 0.76);
+    });
+  }
+
+  for (const width of [1024, 1440, 1870]) {
+    test(`keeps the desktop meaning-card overlap shallow at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+
+      const insightCard = page.locator(".insight-card");
+      const questionCard = insightCard.locator("xpath=preceding-sibling::div[1]");
+      const insightText = insightCard.locator("p");
+      const questionBox = await questionCard.boundingBox();
+      const insightBox = await insightCard.boundingBox();
+      const insightTextBox = await insightText.boundingBox();
+
+      expect(questionBox).not.toBeNull();
+      expect(insightBox).not.toBeNull();
+      expect(insightTextBox).not.toBeNull();
+      const overlap = questionBox!.y + questionBox!.height - insightBox!.y;
+      expect(overlap).toBeGreaterThanOrEqual(16);
+      expect(overlap).toBeLessThanOrEqual(24);
+      expect(insightTextBox!.y).toBeGreaterThanOrEqual(questionBox!.y + questionBox!.height);
+    });
+  }
+
   for (const width of [360, 390, 768, 1024, 1440]) {
     test(`has no horizontal overflow at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 800 });

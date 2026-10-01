@@ -66,9 +66,15 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="absolute bottom-8 right-5 hidden w-[320px] lg:block xl:right-10">
-            <div className="paper-card rotate-2 rounded-[2rem] p-3 shadow-[0_28px_80px_rgba(0,0,0,.55)]">
-              <div className="grid grid-cols-[94px_1fr] gap-4 rounded-[1.45rem] bg-paper p-4">
+          <div
+            className="absolute hidden w-[260px] xl:block 2xl:w-[320px]"
+            style={{
+              right: "clamp(20rem, 25vw, 30rem)",
+              bottom: "max(4rem, calc(100% - 100svh + 4rem))",
+            }}
+          >
+            <div className="paper-card rotate-2 rounded-[2rem] p-2.5 shadow-[0_28px_80px_rgba(0,0,0,.55)] 2xl:p-3">
+              <div className="grid grid-cols-[72px_1fr] gap-3 rounded-[1.45rem] bg-paper p-3 2xl:grid-cols-[94px_1fr] 2xl:gap-4 2xl:p-4">
                 <Image
                   src="/images/book-cover.webp"
                   alt="Cover of Emptiness for the Rest of Us by Muhammad Ibrahim."
@@ -81,7 +87,7 @@ export default function HomePage() {
                     <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
                       The first inquiry
                     </p>
-                    <p className="mt-2 font-serif text-2xl font-semibold leading-none text-text">
+                    <p className="mt-2 font-serif text-xl font-semibold leading-none text-text 2xl:text-2xl">
                       The Phantom in the Room
                     </p>
                   </div>
@@ -153,15 +159,15 @@ export default function HomePage() {
 
       <section className="overflow-hidden bg-paper px-6 py-20 md:py-32">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-12 md:grid-cols-[0.95fr_1.05fr] md:items-center">
-            <div className="grid gap-4 md:relative md:block md:min-h-[430px]">
-              <div className="relative w-full rounded-[2rem] bg-dark-bg p-8 text-dark-text shadow-2xl md:absolute md:left-0 md:top-4 md:w-[72%] md:p-10">
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div className="grid gap-4 lg:block">
+              <div className="relative w-full rounded-[2rem] bg-dark-bg p-8 text-dark-text shadow-2xl lg:w-[78%] lg:p-10 xl:w-[72%]">
                 <p className="eyebrow text-rust-light">The question</p>
-                <p className="mt-6 font-serif text-3xl leading-tight md:text-4xl">
+                <p className="mt-6 font-serif text-3xl leading-tight xl:text-4xl">
                   What if the self you spend your whole life defending is not what you think it is?
                 </p>
               </div>
-              <div className="insight-card relative w-full rounded-[2rem] p-7 md:absolute md:bottom-0 md:right-0 md:w-[70%]">
+              <div className="insight-card relative w-full rounded-[2rem] p-7 lg:-mt-5 lg:ml-auto lg:w-[68%] xl:w-[64%]">
                 <p className="font-sans text-sm leading-relaxed text-[#514943]">
                   Every relationship, ambition, fear, grievance, and prayer orbits something we call “I.” The book asks us to look for it carefully.
                 </p>
