@@ -32,7 +32,7 @@ export default function SiteFooter() {
               ))}
               <li>
                 <Link
-                  href="/privacy"
+                  href="/privacy/"
                   className="font-sans text-sm text-dark-text/55 hover:text-dark-text transition-colors"
                 >
                   Privacy

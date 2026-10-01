@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Privacy",
   description: `Privacy statement for ${site.name}.`,
   alternates: {
-    canonical: "/privacy",
+    canonical: "/privacy/",
   },
   openGraph: {
     title: `Privacy \u2014 ${site.name}`,
     description: `Privacy statement for ${site.name}.`,
-    url: `${site.url}/privacy`,
+    url: `${site.url}/privacy/`,
   },
 };
 

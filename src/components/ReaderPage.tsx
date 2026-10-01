@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ReadingTracker from "./ReadingTracker";
 import TrackedArchiveLink from "./TrackedArchiveLink";
-import { internetArchiveUrl } from "@/content/site";
+import { internetArchiveUrl, site } from "@/content/site";
+import { book } from "@/content/book";
 
 type Segment = {
   type: string;
@@ -36,6 +37,70 @@ export default function ReaderPage({
   completionActiveSeconds,
   next,
 }: Props) {
+  const canonicalPath =
+    contentId === "opening" ? "/read/opening/" : "/read/chapter-one/";
+  const canonicalUrl = `${site.url}${canonicalPath}`;
+  const wordCount = segments.reduce(
+    (total, segment) => total + segment.text.trim().split(/\s+/).length,
+    0,
+  );
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${canonicalUrl}#article`,
+        headline: title,
+        description: introduction,
+        url: canonicalUrl,
+        mainEntityOfPage: canonicalUrl,
+        image: `${site.url}/images/og-image.jpg?v=2`,
+        author: {
+          "@type": "Person",
+          name: site.author.name,
+        },
+        datePublished: book.published,
+        dateModified: "2026-10-01",
+        inLanguage: book.language,
+        wordCount,
+        articleSection: contentId === "opening" ? "Book opening" : "Chapter One",
+        isPartOf: {
+          "@type": "Book",
+          "@id": `${site.url}/book/#book`,
+          name: book.title,
+          author: {
+            "@type": "Person",
+            name: site.author.name,
+          },
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${site.url}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: book.title,
+            item: `${site.url}/book/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: title,
+            item: canonicalUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <ReadingTracker
@@ -134,6 +199,11 @@ export default function ReaderPage({
           </div>
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
     </>
   );
 }

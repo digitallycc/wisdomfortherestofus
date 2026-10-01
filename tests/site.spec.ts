@@ -67,6 +67,36 @@ test.describe("Book page", () => {
   });
 });
 
+test.describe("Search discoverability", () => {
+  test("publishes only canonical URLs in the sitemap", async ({ request }) => {
+    const response = await request.get("/sitemap.xml");
+    const sitemap = await response.text();
+
+    expect(response.ok()).toBeTruthy();
+    expect(sitemap).toContain("https://wisdomfortherestofus.com/book/");
+    expect(sitemap).toContain("https://wisdomfortherestofus.com/read/opening/");
+    expect(sitemap).toContain("https://wisdomfortherestofus.com/read/chapter-one/");
+    expect(sitemap).toContain("https://wisdomfortherestofus.com/privacy/");
+    expect(sitemap).not.toContain("<loc>https://wisdomfortherestofus.com/privacy</loc>");
+  });
+
+  for (const path of ["/read/opening/", "/read/chapter-one/"]) {
+    test(`${path} identifies the excerpt and its book in structured data`, async ({
+      page,
+    }) => {
+      await page.goto(path);
+      const jsonLd = await page
+        .locator('script[type="application/ld+json"]')
+        .allTextContents();
+      const combined = jsonLd.join("\n");
+
+      expect(combined).toContain('"@type":"Article"');
+      expect(combined).toContain('"@type":"BreadcrumbList"');
+      expect(combined).toContain('"@type":"Book"');
+    });
+  }
+});
+
 test.describe("Navigation and responsiveness", () => {
   test("desktop navigation exposes the reading routes", async ({ page }) => {
     await page.goto("/");
